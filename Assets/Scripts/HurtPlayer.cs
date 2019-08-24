@@ -5,6 +5,7 @@ using UnityEngine;
 public class HurtPlayer : MonoBehaviour
 {
   private LevelManager levelManager;
+  public int damageToGive;
 
   void Start()
   {
@@ -15,7 +16,8 @@ public class HurtPlayer : MonoBehaviour
   {
     if (other.tag == "Player")
     {
-      levelManager.Respawn();
+      // levelManager.Respawn();
+      levelManager.HurtPlayer(damageToGive);
     }
   }
 }

@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
   {
     if (other.tag == "KillPlane")
     {
+      levelManager.HurtPlayer(levelManager.maxHealth);
       levelManager.Respawn();
     }
 

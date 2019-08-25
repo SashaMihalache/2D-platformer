@@ -29,7 +29,7 @@ public class SpiderController : MonoBehaviour
   {
     if (other.tag == "KillPlane")
     {
-      Destroy(this.gameObject);
+      this.gameObject.SetActive(false);
     }
   }
 }

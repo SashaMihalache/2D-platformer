@@ -22,7 +22,7 @@ public class StompEnemy : MonoBehaviour
   {
     if (other.tag == "Enemy")
     {
-      Destroy(other.gameObject);
+      other.gameObject.SetActive(false);
       Instantiate(this.deathSplosion, other.transform.position, other.transform.rotation);
       this.playerRigidBody.velocity = new Vector3(this.playerRigidBody.velocity.x, this.bounceForce, 0f);
     }

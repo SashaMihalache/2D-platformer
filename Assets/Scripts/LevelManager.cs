@@ -155,4 +155,10 @@ public class LevelManager : MonoBehaviour
       objectsToReset[i].ResetObject();
     }
   }
+
+  public void AddLives(int livesToAdd)
+  {
+    currentLives += livesToAdd;
+    livesText.text = "Lives x " + currentLives;
+  }
 }

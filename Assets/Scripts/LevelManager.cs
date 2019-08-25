@@ -77,12 +77,19 @@ public class LevelManager : MonoBehaviour
   public void HandleGameOver()
   {
     Debug.Log("intra");
-    levelMusic.Stop();
-    gameOverMusic.Play();
+
+    if (currentLives == 0)
+    {
+      return;
+    }
 
     gameOverScreen.SetActive(true);
     thePlayer.gameObject.SetActive(false);
     livesText.text = "Lives x 0";
+
+    levelMusic.Stop();
+    gameOverMusic.Play();
+    currentLives = 0;
   }
 
   public IEnumerator HandleRespawn()

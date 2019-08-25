@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\Coin.cs" />
      <Compile Include="Assets\Scripts\DestroyOverTime.cs" />
      <Compile Include="Assets\Scripts\ExtraLife.cs" />
+     <Compile Include="Assets\Scripts\FadeIn.cs" />
      <Compile Include="Assets\Scripts\GreenWiggleController.cs" />
      <Compile Include="Assets\Scripts\HealthPickup.cs" />
      <Compile Include="Assets\Scripts\HurtPlayer.cs" />

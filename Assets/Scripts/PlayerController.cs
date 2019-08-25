@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
   public float invicibilityLength;
   private float invicibilityCounter;
 
+  public AudioSource jumpSound;
+  public AudioSource hurtSound;
+
   void Start()
   {
     rb = GetComponent<Rigidbody2D>();
@@ -69,6 +72,7 @@ public class PlayerController : MonoBehaviour
     if (Input.GetButtonDown("Jump") && isGrounded)
     {
       rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, 0f);
+      jumpSound.Play();
     }
   }
 

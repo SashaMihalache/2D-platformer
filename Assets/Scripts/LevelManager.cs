@@ -7,8 +7,12 @@ public class LevelManager : MonoBehaviour
   public float waitToRespawn;
   public PlayerController thePlayer;
   public GameObject deathSplosion;
+  public int maxLifeCoinThreshold;
   public int coinCount;
+  private int coinBonusLifeCount;
+  public AudioSource coinSound;
   public Text coinText;
+
   public Image heart1;
   public Image heart2;
   public Image heart3;
@@ -17,6 +21,7 @@ public class LevelManager : MonoBehaviour
   public Sprite heartEmpty;
   public int maxHealth;
   public int healthCount;
+
   private bool isRespawning;
   public ResetOnRespawn[] objectsToReset;
   public bool invincible;
@@ -24,6 +29,9 @@ public class LevelManager : MonoBehaviour
   public int currentLives;
   public Text livesText;
   public GameObject gameOverScreen;
+
+  public AudioSource levelMusic;
+  public AudioSource gameOverMusic;
 
   void Start()
   {
@@ -45,6 +53,13 @@ public class LevelManager : MonoBehaviour
     {
       this.Respawn();
     }
+
+    if (coinBonusLifeCount >= maxLifeCoinThreshold)
+    {
+      currentLives += 1;
+      livesText.text = "Lives x " + this.currentLives;
+      coinBonusLifeCount -= maxLifeCoinThreshold;
+    }
   }
 
   public void Respawn()
@@ -61,6 +76,10 @@ public class LevelManager : MonoBehaviour
 
   public void HandleGameOver()
   {
+    Debug.Log("intra");
+    levelMusic.Stop();
+    gameOverMusic.Play();
+
     gameOverScreen.SetActive(true);
     thePlayer.gameObject.SetActive(false);
     livesText.text = "Lives x 0";
@@ -68,9 +87,9 @@ public class LevelManager : MonoBehaviour
 
   public IEnumerator HandleRespawn()
   {
+    this.isRespawning = true;
     currentLives -= 1;
     livesText.text = "Lives x " + currentLives;
-    this.isRespawning = true;
     thePlayer.gameObject.SetActive(false);
 
     Instantiate(deathSplosion, thePlayer.transform.position, thePlayer.transform.rotation);
@@ -81,6 +100,7 @@ public class LevelManager : MonoBehaviour
     this.UpdateHeartMeter();
 
     this.coinCount = 0;
+    this.coinBonusLifeCount = 0;
     this.coinText.text = "Coins " + this.coinCount;
 
     this.isRespawning = false;
@@ -93,6 +113,8 @@ public class LevelManager : MonoBehaviour
   public void AddCoins(int coinsToAdd)
   {
     coinCount += coinsToAdd;
+    coinBonusLifeCount += coinsToAdd;
+    coinSound.Play();
 
     coinText.text = "Coins: " + coinCount;
   }
@@ -104,6 +126,7 @@ public class LevelManager : MonoBehaviour
       healthCount -= damageToTake;
       this.UpdateHeartMeter();
       thePlayer.Knockback();
+      thePlayer.hurtSound.Play();
     }
   }
 
@@ -116,6 +139,7 @@ public class LevelManager : MonoBehaviour
       healthCount = maxHealth;
     }
 
+    coinSound.Play();
     this.UpdateHeartMeter();
   }
 
@@ -178,6 +202,7 @@ public class LevelManager : MonoBehaviour
   public void AddLives(int livesToAdd)
   {
     currentLives += livesToAdd;
+    coinSound.Play();
     livesText.text = "Lives x " + currentLives;
   }
 }

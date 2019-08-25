@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
   public float knockbackLength;
   private float knockbackCounter;
 
+  public float invicibilityLength;
+  private float invicibilityCounter;
+
   void Start()
   {
     rb = GetComponent<Rigidbody2D>();
@@ -43,6 +46,8 @@ public class PlayerController : MonoBehaviour
       float directionalKnockbackForce = this.IsPlayerFacingRight() ? knockbackForce : -knockbackForce;
       rb.velocity = new Vector3(-directionalKnockbackForce, knockbackForce, 0f);
     }
+
+    HandleInvincibility();
 
     anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
     anim.SetBool("Grounded", isGrounded);
@@ -85,6 +90,18 @@ public class PlayerController : MonoBehaviour
     }
   }
 
+  void HandleInvincibility()
+  {
+    if (invicibilityCounter > 0)
+    {
+      invicibilityCounter -= Time.deltaTime;
+    }
+    else
+    {
+      levelManager.invincible = false;
+    }
+  }
+
   void OnTriggerEnter2D(Collider2D other)
   {
     if (other.tag == "KillPlane")
@@ -118,6 +135,8 @@ public class PlayerController : MonoBehaviour
   public void Knockback()
   {
     knockbackCounter = knockbackLength;
+    invicibilityCounter = invicibilityLength;
+    levelManager.invincible = true;
   }
 
   private bool IsPlayerFacingRight()

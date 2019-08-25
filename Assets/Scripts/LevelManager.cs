@@ -23,6 +23,7 @@ public class LevelManager : MonoBehaviour
   public int startingLives;
   public int currentLives;
   public Text livesText;
+  public GameObject gameOverScreen;
 
   void Start()
   {
@@ -50,20 +51,26 @@ public class LevelManager : MonoBehaviour
   {
     if (currentLives - 1 <= 0)
     {
-      thePlayer.gameObject.SetActive(false);
-      livesText.text = "Lives x 0";
+      HandleGameOver();
     }
     else
     {
-      currentLives -= 1;
-      livesText.text = "Lives x " + currentLives;
-      this.isRespawning = true;
-      StartCoroutine("RespawnCo");
+      StartCoroutine("HandleRespawn");
     }
   }
 
-  public IEnumerator RespawnCo()
+  public void HandleGameOver()
   {
+    gameOverScreen.SetActive(true);
+    thePlayer.gameObject.SetActive(false);
+    livesText.text = "Lives x 0";
+  }
+
+  public IEnumerator HandleRespawn()
+  {
+    currentLives -= 1;
+    livesText.text = "Lives x " + currentLives;
+    this.isRespawning = true;
     thePlayer.gameObject.SetActive(false);
 
     Instantiate(deathSplosion, thePlayer.transform.position, thePlayer.transform.rotation);

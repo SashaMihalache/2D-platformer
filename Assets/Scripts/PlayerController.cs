@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour
   public float groundCheckRadius;
   public bool isGrounded;
   public LayerMask whatIsGround;
-  private Rigidbody2D rb;
-  private Animator anim;
   public Vector3 respawnPosition;
   public LevelManager levelManager;
+  public GameObject stompBox;
+  private Rigidbody2D rb;
+  private Animator anim;
+
   void Start()
   {
     rb = GetComponent<Rigidbody2D>();
@@ -29,6 +31,15 @@ public class PlayerController : MonoBehaviour
 
     anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
     anim.SetBool("Grounded", isGrounded);
+
+    if (rb.velocity.y < 0)
+    {
+      stompBox.SetActive(true);
+    }
+    else
+    {
+      stompBox.SetActive(false);
+    }
   }
 
   void HandleJumpMovement()

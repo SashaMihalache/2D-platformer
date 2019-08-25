@@ -5,10 +5,12 @@ using UnityEngine;
 public class StompEnemy : MonoBehaviour
 {
   public GameObject deathSplosion;
+  public float bounceForce;
+  private Rigidbody2D playerRigidBody;
 
   void Start()
   {
-
+    playerRigidBody = transform.parent.GetComponent<Rigidbody2D>();
   }
 
   void Update()
@@ -21,7 +23,8 @@ public class StompEnemy : MonoBehaviour
     if (other.tag == "Enemy")
     {
       Destroy(other.gameObject);
-      Instantiate(deathSplosion, other.transform.position, other.transform.rotation);
+      Instantiate(this.deathSplosion, other.transform.position, other.transform.rotation);
+      this.playerRigidBody.velocity = new Vector3(this.playerRigidBody.velocity.x, this.bounceForce, 0f);
     }
   }
 }

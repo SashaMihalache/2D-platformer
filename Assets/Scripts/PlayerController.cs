@@ -7,12 +7,17 @@ public class PlayerController : MonoBehaviour
   public float jumpSpeed;
   public float groundCheckRadius;
   public bool isGrounded;
+
   public LayerMask whatIsGround;
   public Vector3 respawnPosition;
   public LevelManager levelManager;
   public GameObject stompBox;
   private Rigidbody2D rb;
   private Animator anim;
+
+  public float knockbackForce;
+  public float knockbackLength;
+  private float knockbackCounter;
 
   void Start()
   {
@@ -26,8 +31,18 @@ public class PlayerController : MonoBehaviour
 
   void Update()
   {
-    HandleHorizontalMovement();
-    HandleJumpMovement();
+    if (knockbackCounter <= 0)
+    {
+      HandleHorizontalMovement();
+      HandleJumpMovement();
+    }
+    else
+    {
+      knockbackCounter -= Time.deltaTime;
+
+      float directionalKnockbackForce = this.IsPlayerFacingRight() ? knockbackForce : -knockbackForce;
+      rb.velocity = new Vector3(-directionalKnockbackForce, knockbackForce, 0f);
+    }
 
     anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
     anim.SetBool("Grounded", isGrounded);
@@ -98,5 +113,15 @@ public class PlayerController : MonoBehaviour
     {
       transform.parent = null;
     }
+  }
+
+  public void Knockback()
+  {
+    knockbackCounter = knockbackLength;
+  }
+
+  private bool IsPlayerFacingRight()
+  {
+    return transform.localScale.x > 0;
   }
 }

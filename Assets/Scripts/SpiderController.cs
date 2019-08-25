@@ -32,4 +32,9 @@ public class SpiderController : MonoBehaviour
       this.gameObject.SetActive(false);
     }
   }
+
+  void OnEnable()
+  {
+    canMove = false;
+  }
 }

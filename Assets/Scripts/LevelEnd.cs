@@ -47,6 +47,9 @@ public class LevelEnd : MonoBehaviour
     theCamera.followTarget = false;
     theLevelManager.invincible = true;
 
+    theLevelManager.levelMusic.Stop();
+    theLevelManager.levelWonMusic.Play();
+
     thePlayer.rb.velocity = Vector3.zero;
 
     yield return new WaitForSeconds(waitToMove);

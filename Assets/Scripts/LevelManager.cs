@@ -31,6 +31,7 @@ public class LevelManager : MonoBehaviour
   public GameObject gameOverScreen;
 
   public AudioSource levelMusic;
+  public AudioSource levelWonMusic;
   public AudioSource gameOverMusic;
 
   void Start()

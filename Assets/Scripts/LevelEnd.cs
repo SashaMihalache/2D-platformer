@@ -5,6 +5,8 @@ using System.Collections;
 public class LevelEnd : MonoBehaviour
 {
   public string levelToLoad;
+  public string levelToUnlock;
+
   private PlayerController thePlayer;
   private CameraController theCamera;
   private LevelManager theLevelManager;
@@ -53,6 +55,11 @@ public class LevelEnd : MonoBehaviour
     thePlayer.rb.velocity = Vector3.zero;
 
     yield return new WaitForSeconds(waitToMove);
+
+    PlayerPrefs.SetInt("CoinCount", theLevelManager.coinCount);
+    PlayerPrefs.SetInt("PlayerLives", theLevelManager.currentLives);
+
+    PlayerPrefs.SetInt(levelToUnlock, 1);
 
     movePlayer = true;
 

@@ -490,16 +490,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5567655912228401102, guid: 472fbfa83f7d140bcbe4441e6ea63708,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -0.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 5567655912228401102, guid: 472fbfa83f7d140bcbe4441e6ea63708,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 6297142490701475689, guid: 472fbfa83f7d140bcbe4441e6ea63708,
         type: 3}
       propertyPath: m_Name
@@ -509,6 +499,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5567655912228401102, guid: 472fbfa83f7d140bcbe4441e6ea63708,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5567655912228401102, guid: 472fbfa83f7d140bcbe4441e6ea63708,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6297142490701475696, guid: 472fbfa83f7d140bcbe4441e6ea63708,
         type: 3}
@@ -2153,6 +2153,16 @@ PrefabInstance:
       propertyPath: waitToLoad
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 501011550531991734, guid: fd472b6f6da4941cea4ca9a785682289,
+        type: 3}
+      propertyPath: levelToLoad
+      value: LevelSelect
+      objectReference: {fileID: 0}
+    - target: {fileID: 501011550531991734, guid: fd472b6f6da4941cea4ca9a785682289,
+        type: 3}
+      propertyPath: levelToUnlock
+      value: Level2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd472b6f6da4941cea4ca9a785682289, type: 3}
 --- !u!1001 &2077791491890800588
@@ -2389,7 +2399,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1643204789, guid: c3e34876685e443c5b798934f301bf50, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 5.0999985
+      value: 5.100006
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921723936585024292, guid: c3e34876685e443c5b798934f301bf50,
+        type: 3}
+      propertyPath: currentLives
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3e34876685e443c5b798934f301bf50, type: 3}
